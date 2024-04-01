@@ -1,5 +1,6 @@
 package com.example.bookingsapp.DB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -58,6 +59,44 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Rooms");
         // Tạo lại cơ sở dữ liệu
         onCreate(db);
+    }
+
+    // Phương thức thêm khách hàng
+    public long addCustomer(String name, String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        values.put("email", email);
+        values.put("password", password);
+        long id = db.insert("Customer", null, values);
+        db.close();
+        return id;
+    }
+
+    // Phương thức thêm khách sạn
+    public long addHotel(String name, String address, double rating) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        values.put("address", address);
+        values.put("rating", rating);
+        long id = db.insert("Hotels", null, values);
+        db.close();
+        return id;
+    }
+
+    // Phương thức thêm phòng mới
+    public long addRoom(int hotelId, String roomNumber, String type, double price, int availability) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("hotel_id", hotelId);
+        values.put("room_number", roomNumber);
+        values.put("type", type);
+        values.put("price", price);
+        values.put("availability", availability);
+        long id = db.insert("Rooms", null, values);
+        db.close();
+        return id;
     }
 }
 
