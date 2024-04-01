@@ -17,14 +17,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // Tạo bảng Hotels
         db.execSQL("CREATE TABLE Hotels (" +
-                "id INTEGER PRIMARY KEY," +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT," +
                 "address TEXT," +
                 "rating REAL)");
 
         // Tạo bảng Customer
         db.execSQL("CREATE TABLE Customer (" +
-                "id INTEGER PRIMARY KEY," +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT," +
                 "email TEXT)");
 
