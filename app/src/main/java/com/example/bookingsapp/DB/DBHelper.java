@@ -21,13 +21,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT," +
                 "address TEXT," +
-                "rating REAL)");
+                "rating REAL," +
+                "username TEXT," +
+                "password TEXT)");
 
         // Tạo bảng Customer
         db.execSQL("CREATE TABLE Customer (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT," +
-                "email TEXT)");
+                "email TEXT," +
+                "username TEXT," +
+                "password TEXT)");
 
         // Tạo bảng Bookings
         db.execSQL("CREATE TABLE Bookings (" +
@@ -62,11 +66,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // Phương thức thêm khách hàng
-    public long addCustomer(String name, String email, String password) {
+    public long addCustomer(String name, String email, String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("email", email);
+        values.put("username", username);
         values.put("password", password);
         long id = db.insert("Customer", null, values);
         db.close();
@@ -74,12 +79,14 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // Phương thức thêm khách sạn
-    public long addHotel(String name, String address, double rating) {
+    public long addHotel(String name, String address, double rating, String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("address", address);
         values.put("rating", rating);
+        values.put("username", username);
+        values.put("password", password);
         long id = db.insert("Hotels", null, values);
         db.close();
         return id;
